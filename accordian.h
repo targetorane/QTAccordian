@@ -14,8 +14,10 @@ class Accordian : public QWidget
 public:
     explicit Accordian(QWidget *parent = 0);
     ~Accordian();
+    void addColorPicker( QString name );
     void setContentTitle( QString title );
-    void setPaneContent( int content_choice );
+    void setPaneContent( QWidget* widget );
+    void addFloatValueSlider( QString name, float range_1 , float range_2 );
 
 private slots:
    void on_pushButton_clicked();

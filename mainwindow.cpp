@@ -3,6 +3,7 @@
 #include "accordian.h"
 
 #include <QVBoxLayout>
+#include <transformview.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,16 +21,31 @@ void MainWindow::on_pushButton_clicked()
 {
     Accordian *accordian = new Accordian();
     accordian->setContentTitle("Global");
-    accordian->setPaneContent(1);
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addColorPicker("Glossy Shade");
+    accordian->addFloatValueSlider("Specular", 1, 100);
+
     Accordian *accordian2 = new Accordian();
-    accordian2->setContentTitle("Diffuse");
-    accordian2->setPaneContent(2);
+    accordian2->setContentTitle("Something");
+    accordian2->addColorPicker("Glossy Shade");
+    accordian2->addColorPicker("Glossy Shade");
+    accordian2->addFloatValueSlider("Specular", 1, 100);
+    accordian2->addFloatValueSlider("Specular", 1, 100);
+    accordian2->addFloatValueSlider("Specular", 1, 100);
+
     Accordian *accordian3 = new Accordian();
     accordian3->setContentTitle("Roughness");
-    accordian3->setPaneContent(3);
+
     Accordian *accordian4 = new Accordian();
     accordian4->setContentTitle("Grunge");
-    accordian4->setPaneContent(4);
 
     QVBoxLayout *mainLay = new QVBoxLayout(this);
     mainLay->addWidget(accordian);
@@ -40,6 +56,4 @@ void MainWindow::on_pushButton_clicked()
     mainLay->setMargin(0);
 
     ui->contentpane->setLayout(mainLay);
-    //accordian->mainLay = mainLay;
-    //accordian2->mainLay = mainLay;
 }

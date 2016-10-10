@@ -14,13 +14,22 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    accordian.cpp
+    accordian.cpp \
+    transformview.cpp \
+    hfloatslider.cpp \
+    colorpickerwidget.cpp
 
 HEADERS  += mainwindow.h \
-    accordian.h
+    accordian.h \
+    transformview.h \
+    hfloatslider.h \
+    colorpickerwidget.h
 
 FORMS    += mainwindow.ui \
-    accordian.ui
+    accordian.ui \
+    transformview.ui \
+    hfloatslider.ui \
+    colorpickerwidget.ui
 
 RESOURCES += \
     icons.qrc

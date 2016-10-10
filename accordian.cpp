@@ -1,12 +1,22 @@
 #include "accordian.h"
 #include "ui_accordian.h"
 #include <QLineEdit>
+#include <QSpinBox>
+#include <hfloatslider.h>
+#include "ui_hfloatslider.h"
+#include <colorpickerwidget.h>
+#include "ui_colorpickerwidget.h"
 
 Accordian::Accordian(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Accordian)
 {
     ui->setupUi(this);
+
+    //setted layout reference to addslider function
+
+    QVBoxLayout *layout = new QVBoxLayout();
+    ui->contentpane->setLayout(layout);
 }
 
 Accordian::~Accordian()
@@ -35,51 +45,54 @@ void Accordian::setContentTitle( QString title ){
 
 }
 
-void Accordian::setPaneContent( int content_choice ){
+void Accordian::addFloatValueSlider( QString name, float range_1 , float range_2 )
+{
+    /*
+    QLabel *labelname = new QLabel(name);
+    QSlider *floatslider = new QSlider();
+    QSpinBox *spinbox = new QSpinBox();
 
-    switch( content_choice ){
-        case 1:
-              QLabel *lblFirstName = new QLabel("First Name");
-              QLabel *lblLastName = new QLabel("Last Name");
+    floatslider->setRange( range_1 , range_2 );
+    spinbox->setRange(range_1 , range_2 );
 
-              QLineEdit *txtFirstName = new QLineEdit();
-              QLineEdit *txtLastName = new QLineEdit();
+    QHBoxLayout *hori_layout = new QHBoxLayout;
+    hori_layout->addWidget(labelname);
+    hori_layout->addWidget(floatslider);
+    hori_layout->addWidget(spinbox);
+    */
 
-              QPushButton *btnOk = new QPushButton("OK");
-              QPushButton *btnCancel = new QPushButton("Cancel");
+    HFloatSlider *slider = new HFloatSlider();
+    slider->ui->label->setText(name);
+    slider->ui->slider->setRange( range_1 , range_2 );
+    slider->ui->spinbox->setRange( range_1 , range_2 );
+/*
+    QHBoxLayout *HLayout = new QHBoxLayout;
+    HLayout->addWidget(slider);
 
-              QHBoxLayout *top = new QHBoxLayout;
-              QHBoxLayout *bottom = new QHBoxLayout;
-              QHBoxLayout *btnLayout = new QHBoxLayout;
+    QVBoxLayout *layout = new QVBoxLayout();
+    layout->addLayout(HLayout);
+    layout->addStretch();
 
-              top->addWidget(lblFirstName);
-              top->addWidget(txtFirstName);
+    ui->contentpane->setLayout();
+*/
+    ui->contentpane->layout()->addWidget(slider);
+    //layout has ot be set prior to adding widgets to file
+    //prevent overloading original files.
+}
 
-              bottom->addWidget(lblLastName);
-              bottom->addWidget(txtLastName);
+void Accordian::addColorPicker( QString name )
+{
 
-              btnLayout->addStretch();
-              btnLayout->addWidget(btnOk);
-              btnLayout->addWidget(btnCancel);
+    ColorPickerWidget *colorpicker = new ColorPickerWidget();
+    colorpicker->ui->label->setText(name);
+    ui->contentpane->layout()->addWidget(colorpicker);
+    //layout has ot be set prior to adding widgets to file
+    //prevent overloading original files.
+}
 
-              QVBoxLayout *mainLayout = new QVBoxLayout(this);
-              mainLayout->addLayout(top);
-              mainLayout->addLayout(bottom);
-              mainLayout->addLayout(btnLayout);
-              mainLayout->addStretch();
+void Accordian::setPaneContent( QWidget* widget ){
 
-              ui->contentpane->setLayout(mainLayout);
-
-            break;
-              /*
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-            */
-
-    }
-
+    auto grid = new QGridLayout();
+    grid->addWidget(widget);
+    ui->contentpane->setLayout(grid);
 }
